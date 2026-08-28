@@ -12,7 +12,7 @@
     input[type="text"], input[type="date"], input[type="time"], input[type="email"], input[type="password"], select { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 4px; box-sizing: border-box; }
     .row { display: flex; gap: 15px; flex-wrap: wrap; }
     .col { flex: 1; min-width: 200px; }
-
+    
     button { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s; }
     .btn-primary { background: #3182ce; color: white; }
     .btn-primary:hover { background: #2b6cb0; }
@@ -21,43 +21,43 @@
     .btn-danger { background: #e53e3e; color: white; }
     .btn-danger:hover { background: #c53030; }
     .btn-outline { background: transparent; border: 1px solid #cbd5e0; color: #4a5568; }
-
+    
     .dynamic-list { margin-bottom: 15px; }
     .dynamic-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
     .dynamic-item input, .dynamic-item select { flex: 1; }
-
-    .signature-wrapper {
-      border: 2px dashed #cbd5e0;
-      border-radius: 4px;
-      background: #fafafa;
-      margin-bottom: 10px;
-      position: relative;
-      width: 100%;
+    
+    .signature-wrapper { 
+      border: 2px dashed #cbd5e0; 
+      border-radius: 4px; 
+      background: #fafafa; 
+      margin-bottom: 10px; 
+      position: relative; 
+      width: 100%; 
       overflow: hidden;
       touch-action: none;
     }
-    #signature-pad {
-      display: block;
-      width: 100%;
-      height: auto;
-      cursor: crosshair;
+    #signature-pad { 
+      display: block; 
+      width: 100%; 
+      height: auto; 
+      cursor: crosshair; 
       touch-action: none;
       -ms-touch-action: none;
     }
-    .clear-btn {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      padding: 5px 10px;
-      font-size: 0.8em;
-      z-index: 10;
+    .clear-btn { 
+      position: absolute; 
+      bottom: 10px; 
+      right: 10px; 
+      padding: 5px 10px; 
+      font-size: 0.8em; 
+      z-index: 10; 
       background: white;
     }
-
+    
     #participants-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
     .participant-module { background: #e6fffa; border-left: 5px solid #38a169; padding: 15px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
     .participant-module strong { color: #276749; font-size: 1.1em; }
-
+    
     .photo-preview-container { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
     .photo-thumb { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 2px solid #3182ce; }
 
@@ -77,26 +77,26 @@
 
     .view-section { display: none; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
+    
     .dashboard-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
     .dashboard-table th, .dashboard-table td { border: 1px solid #cbd5e0; padding: 10px; text-align: left; }
     .dashboard-table th { background: #edf2f7; font-weight: bold; color: #2d3748; }
     .dashboard-table tr:nth-child(even) { background: #f7fafc; }
-
+    
     .badge { padding: 4px 10px; border-radius: 12px; font-size: 0.75em; font-weight: bold; display: inline-block; text-transform: uppercase; }
     .badge.verde { background: #c6f6d5; color: #22543d; }
     .badge.rojo { background: #fed7d7; color: #822727; }
     .badge.amarillo { background: #fefcbf; color: #744210; }
     .badge.azul { background: #bee3f8; color: #2a4365; }
-
+    
     .resumen-box { display: flex; gap: 10px; flex-wrap: wrap; padding: 10px; background: #f7fafc; border-radius: 6px; border: 1px solid #e2e8f0; }
-
+    
     .acuerdo-row { background: #fffaf0; border-left: 4px solid #ed8936; padding: 8px; border-radius: 4px; margin-bottom: 8px; }
-
+    
     /* NUEVO: Spinner de carga */
     .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid #e2e8f0; border-top-color: #3182ce; border-radius: 50%; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
+    
     /* NUEVO: Mensaje de error visible */
     .error-box { background: #fed7d7; color: #822727; padding: 15px; border-radius: 6px; border: 1px solid #fc8181; margin: 10px 0; }
     .info-box { background: #e6fffa; color: #234e52; padding: 15px; border-radius: 6px; border: 1px solid #81e6d9; margin: 10px 0; }
@@ -104,24 +104,24 @@
     .dashboard-wrapper { background-color: #eef2f6; padding: 25px; border-radius: 12px; font-family: 'Segoe UI', sans-serif; }
     .dashboard-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px; margin-bottom: 25px; }
     .dashboard-header h2 { margin: 0; border: none; font-size: 2em; color: #1a202c; font-weight: 700; }
-
+    
     .kpi-container { display: flex; gap: 20px; justify-content: space-between; margin-bottom: 25px; flex-wrap: wrap; }
     .kpi-card { flex: 1; min-width: 140px; padding: 20px 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.2s; }
     .kpi-card:hover { transform: translateY(-5px); }
-
+    
     /* Colores idénticos a la imagen */
     .kpi-card.gray { background: linear-gradient(135deg, #cbd5e0, #a0aec0); color: #1a202c; }
     .kpi-card.green { background: linear-gradient(135deg, #68d391, #48bb78); color: #1c4532; }
     .kpi-card.blue { background: linear-gradient(135deg, #90cdf4, #63b3ed); color: #2a4365; }
     .kpi-card.yellow { background: linear-gradient(135deg, #fef08a, #f6e05e); color: #744210; }
     .kpi-card.red { background: linear-gradient(135deg, #fc8181, #e53e3e); color: #fff5f5; }
-
+    
     .kpi-title { font-size: 1.05em; font-weight: 600; line-height: 1.3; }
     .kpi-value { font-size: 2em; font-weight: 900; margin: 5px 0; }
     .kpi-icon { font-size: 3em; margin-top: 5px; opacity: 0.75; }
-
+    
     .chart-panel { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 25px; }
-
+    
     .gauge-wrapper { width: 350px; margin: 0 auto; position: relative; text-align: center; }
     .gauge-text { position: absolute; bottom: 15px; left: 0; right: 0; display: flex; flex-direction: column; }
     .gauge-pct { font-size: 3em; font-weight: 800; color: #2c3e50; }
@@ -165,7 +165,7 @@
     <!-- SECCIÓN: REGISTRO DE ACTAS -->
     <div id="view-app" class="view-section">
       <h2>Datos de la Reunión</h2>
-
+      
       <div class="row">
         <div class="col form-group">
           <label>Tema a tratar</label>
@@ -203,10 +203,10 @@
         </div>
       </div>
 
-      <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
 
-      <h3>Agenda y Acuerdos</h3>
-
+      <h3>Agenda, Acuerdos y Compromisos</h3>
+      
       <div class="form-group">
         <label>Puntos de Agenda</label>
         <div id="agenda-container" class="dynamic-list"></div>
@@ -214,16 +214,22 @@
       </div>
 
       <div class="form-group">
-        <label>Acuerdos Tomados (con plazo y responsable)</label>
+        <label>Acuerdos (Decisiones sin fecha límite)</label>
         <div id="acuerdos-container" class="dynamic-list"></div>
-        <button class="btn-primary" onclick="addAcuerdoItem()">+ Añadir Acuerdo</button>
+        <button class="btn-primary" onclick="addAcuerdoSimple()">+ Añadir Acuerdo</button>
+      </div>
+
+      <div class="form-group">
+        <label>Compromisos (Tareas con Plazo y Responsable)</label>
+        <div id="compromisos-container" class="dynamic-list"></div>
+        <button class="btn-primary" onclick="addCompromisoItem()">+ Añadir Compromiso</button>
       </div>
 
       <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
 
-      <h3>Registro de Asistente</h3>
+      <h3>Registro de Asistente</h3>  
       <div id="alert">✅ Asistente registrado. Formulario listo para el siguiente.</div>
-
+      
       <div class="row">
         <div class="col form-group">
           <label>Nombres</label>
@@ -289,7 +295,7 @@
 <!-- VISTA DASHBOARD (PANEL GERENCIAL) -->
     <div id="view-dashboard" class="view-section">
       <div class="dashboard-wrapper">
-
+        
         <!-- CABECERA -->
         <div class="dashboard-header">
           <h2>Panel Gerencial de Cumplimiento de Acuerdos</h2>
@@ -344,7 +350,7 @@
         <div class="chart-panel">
           <canvas id="chartCumplimiento" height="70"></canvas>
         </div>
-
+        
         <div class="chart-panel">
           <canvas id="chartEstado" height="70"></canvas>
         </div>
@@ -438,7 +444,7 @@
         }
       }).getSessionUser(savedToken);
     }
-
+    
     setTimeout(function() {
       addDynamicItem('agenda-container', 'Punto de agenda');
       addAcuerdoItem();
@@ -473,13 +479,13 @@
     var email = document.getElementById('login-email').value.trim();
     var password = document.getElementById('login-password').value;
     var errorBox = document.getElementById('login-error');
-
+    
     if (!email || !password) {
       errorBox.innerText = 'Ingrese correo y contraseña.';
       errorBox.style.display = 'block';
       return;
     }
-
+    
     errorBox.style.display = 'none';
     google.script.run.withSuccessHandler(function(res) {
       if (res.success) {
@@ -537,34 +543,59 @@
     container.appendChild(div);
   }
 
-  function addAcuerdoItem() {
-  var container = document.getElementById('acuerdos-container');
-  var div = document.createElement('div');
-  div.className = 'dynamic-item acuerdo-row';
-  div.innerHTML =
-    '<input type="text" class="acuerdo-texto" placeholder="Descripción del acuerdo" style="flex: 2;">' +
-    '<input type="text" class="acuerdo-responsable" placeholder="Oficina responsable" style="flex: 1;">' +
-    '<input type="number" class="acuerdo-plazo" placeholder="N°" style="width: 60px;" min="1" value="1">' +
-    '<select class="acuerdo-unidad" style="width: 115px;">' + // <-- Ampliado el ancho para ajustar el texto
-      '<option value="horas">Horas</option>' +
-      '<option value="días hábiles" selected>Días Hábiles</option>' + // <-- Modificado aquí
-      '<option value="meses">Meses</option>' +
-    '</select>' +
-    '<button class="btn-danger" onclick="this.parentElement.remove()" style="width: 40px;">X</button>';
-  container.appendChild(div);
-}
+// --- LÓGICA DE ACUERDOS (SIN PLAZO) ---
+  function addAcuerdoSimple() {
+    var container = document.getElementById('acuerdos-container');
+    var div = document.createElement('div');
+    div.className = 'dynamic-item acuerdo-simple-row';
+    div.innerHTML = 
+      '<input type="text" class="acuerdo-texto" placeholder="Descripción del acuerdo" style="flex: 2;">' +
+      '<input type="text" class="acuerdo-responsable" placeholder="Responsable" style="flex: 1;">' +
+      '<button class="btn-danger" onclick="this.parentElement.remove()" style="width: 40px;">X</button>';
+    container.appendChild(div);
+  }
 
-  function getAcuerdosValues() {
-    var items = document.querySelectorAll('.acuerdo-row');
+  function getAcuerdosSimples() {
+    var items = document.querySelectorAll('.acuerdo-simple-row');
     var values = [];
     items.forEach(function(div) {
       var texto = div.querySelector('.acuerdo-texto').value.trim();
       if (texto) {
+        values.push({ texto: texto, responsable: div.querySelector('.acuerdo-responsable').value.trim() || 'No especificado' });
+      }
+    });
+    return values;
+  }
+
+  // --- LÓGICA DE COMPROMISOS (CON PLAZO) ---
+  function addCompromisoItem() {
+    var container = document.getElementById('compromisos-container');
+    var div = document.createElement('div');
+    div.className = 'dynamic-item compromiso-row';
+    div.innerHTML = 
+      '<input type="text" class="compromiso-texto" placeholder="Descripción del compromiso" style="flex: 2;">' +
+      '<input type="text" class="compromiso-responsable" placeholder="Oficina responsable" style="flex: 1;">' +
+      '<input type="number" class="compromiso-plazo" placeholder="N°" style="width: 60px;" min="1" value="1">' +
+      '<select class="compromiso-unidad" style="width: 115px;">' + 
+        '<option value="horas">Horas</option>' +
+        '<option value="días hábiles" selected>Días Hábiles</option>' + 
+        '<option value="meses">Meses</option>' +
+      '</select>' +
+      '<button class="btn-danger" onclick="this.parentElement.remove()" style="width: 40px;">X</button>';
+    container.appendChild(div);
+  }
+
+  function getCompromisosValues() {
+    var items = document.querySelectorAll('.compromiso-row');
+    var values = [];
+    items.forEach(function(div) {
+      var texto = div.querySelector('.compromiso-texto').value.trim();
+      if (texto) {
         values.push({
           texto: texto,
-          responsable: div.querySelector('.acuerdo-responsable').value.trim() || 'No especificado',
-          plazo: div.querySelector('.acuerdo-plazo').value || 0,
-          unidad: div.querySelector('.acuerdo-unidad').value
+          responsable: div.querySelector('.compromiso-responsable').value.trim() || 'No especificado',
+          plazo: div.querySelector('.compromiso-plazo').value || 0,
+          unidad: div.querySelector('.compromiso-unidad').value
         });
       }
     });
@@ -589,14 +620,14 @@
     google.script.run.withSuccessHandler(function(res) {
       if(res.success) {
         historialGlobal = res.asistentes;
-
+        
         var dlNombres = document.getElementById('lista-nombres');
         var dlApellidos = document.getElementById('lista-apellidos');
         var dlCargos = document.getElementById('lista-cargos');
         var dlUnidades = document.getElementById('lista-unidades');
-
+        
         // Limpiamos las listas por si se recarga
-        dlNombres.innerHTML = ''; dlApellidos.innerHTML = '';
+        dlNombres.innerHTML = ''; dlApellidos.innerHTML = ''; 
         dlCargos.innerHTML = ''; dlUnidades.innerHTML = '';
 
         // Llenar el desplegable de Nombres
@@ -605,7 +636,7 @@
           opt.value = a.nombre;
           dlNombres.appendChild(opt);
         });
-
+        
         // Llenar desplegables independientes de Apellidos, Cargos y Unidades
         res.apellidos.forEach(function(a) { dlApellidos.appendChild(new Option(a)); });
         res.cargos.forEach(function(c) { dlCargos.appendChild(new Option(c)); });
@@ -628,29 +659,29 @@
       if (!document.getElementById('asis-apellidos').value) document.getElementById('asis-apellidos').value = match.apellido;
       if (!document.getElementById('asis-cargo').value) document.getElementById('asis-cargo').value = match.cargo;
       if (!document.getElementById('asis-unidad').value) document.getElementById('asis-unidad').value = match.unidad;
-
+      
       // Activar la firma digital automáticamente
       var checkboxFirma = document.getElementById('usar-firma-digital');
       if(checkboxFirma) checkboxFirma.checked = true;
-
+      
       // Dibujar la previsualización de la firma en el cuadro (Canvas)
       if (typeof sigCanvas !== 'undefined' && sigCtx) {
         clearSignature();
         sigCtx.fillStyle = "#ebf8ff";
         sigCtx.fillRect(0, 0, sigCanvas.width, sigCanvas.height);
-
+        
         sigCtx.fillStyle = "#2b6cb0";
         sigCtx.font = "14px 'Segoe UI', sans-serif";
         sigCtx.fillText("✅ FIRMA DIGITAL AUTOMÁTICA LISTA", 15, 30);
-
+        
         sigCtx.fillStyle = "#1a202c";
         sigCtx.font = "bold 20px 'Segoe UI', sans-serif";
         sigCtx.fillText(match.apellido.toUpperCase() + ", " + match.nombre, 15, 65);
-
+        
         sigCtx.fillStyle = "#4a5568";
         sigCtx.font = "12px 'Segoe UI', sans-serif";
         sigCtx.fillText("El sello oficial se insertará en el PDF al generar el acta.", 15, 100);
-
+        
         sigDrawing = false;
       }
     }
@@ -666,7 +697,7 @@
     reader.onload = function(e) {
       firmaSubidaBase64 = e.target.result;
       // Limpiamos el área de dibujo para que no se confundan ambas firmas
-      clearSignature();
+      clearSignature(); 
     };
     reader.readAsDataURL(file);
   }
@@ -679,7 +710,7 @@
     sigCtx.lineWidth = 2;
     sigCtx.strokeStyle = '#000000';
     sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-
+    
     if (!sigCanvas.hasListeners) {
       sigCanvas.addEventListener('mousedown', sigStart);
       sigCanvas.addEventListener('mousemove', sigMove);
@@ -759,11 +790,11 @@
       alert("Por favor ingrese al menos nombres y apellidos.");
       return;
     }
-
+    
     // Capturamos si activó la Firma Automática
     var usarFirmaDigital = document.getElementById('usar-firma-digital').checked;
-
-    var firmaFinal = firmaSubidaBase64;
+    
+    var firmaFinal = firmaSubidaBase64; 
     // Si NO usa firma digital automática y no subió archivo, tomamos el dibujo
     if (!firmaFinal && !usarFirmaDigital) {
       var isBlank = isSignatureEmpty();
@@ -778,25 +809,25 @@
       firma: firmaFinal,
       usarFirmaDigital: usarFirmaDigital // <-- Se envía la instrucción al backend
     };
-
+    
     asistentes.push(asistente);
     renderizarParticipantes();
     var alertBox = document.getElementById('alert');
     alertBox.style.display = 'block';
     setTimeout(function() { alertBox.style.display = 'none'; }, 3000);
-
+    
     // Limpiamos todos los campos para el siguiente asistente
     document.getElementById('asis-nombres').value = '';
     document.getElementById('asis-apellidos').value = '';
     document.getElementById('asis-cargo').value = '';
     document.getElementById('asis-unidad').value = '';
     clearSignature();
-
+    
     // NUEVO: Limpiamos también el botón de subir archivo
-    document.getElementById('firma-file-input').value = '';
-    firmaSubidaBase64 = null;
+    document.getElementById('firma-file-input').value = ''; 
+    firmaSubidaBase64 = null; 
     document.getElementById('usar-firma-digital').checked = false; // <-- Limpiar checkbox
-    document.getElementById('usar-firma-digital').checked = false;
+    document.getElementById('usar-firma-digital').checked = false; 
     document.getElementById('directorio-select').value = ''; // <--- AGREGA ESTA LÍNEA
   }
 
@@ -824,7 +855,6 @@
       alert("Ingrese el tema de la reunión y registre al menos un asistente.");
       return;
     }
-    document.getElementById('loader').style.display = 'block';
     var datosReunion = {
       tema: document.getElementById('tema').value,
       modalidad: document.getElementById('modalidad').value,
@@ -833,10 +863,11 @@
       horaInicio: document.getElementById('horaInicio').value,
       horaFin: document.getElementById('horaFin').value,
       agenda: getDynamicValues('agenda-container'),
-      acuerdos: getAcuerdosValues(),
+      acuerdos: getAcuerdosSimples(), // Lista sin plazo
+      compromisos: getCompromisosValues(), // Lista con plazo
       asistentes: asistentes,
       fotos: fotosBase64
-    };
+    }; 
     google.script.run.withSuccessHandler(function(res) {
       document.getElementById('loader').style.display = 'none';
       if(res.success) {
@@ -874,34 +905,34 @@
     var tbody = document.getElementById('dashboard-body');
     var status = document.getElementById('dashboard-status');
     var errorBox = document.getElementById('dashboard-error');
-
+    
     // Mostrar estado de carga
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px;"><div class="spinner"></div> Cargando acuerdos...</td></tr>';
     status.innerText = '⏳ Consultando servidor...';
     errorBox.style.display = 'none';
-
+    
     // NUEVO: Log para debug en consola del navegador
     console.log('Dashboard: Solicitando acuerdos con token:', currentToken ? 'OK' : 'NULL');
     console.log('Dashboard: Filtro oficina:', filtro || 'Todas');
-
+    
     google.script.run
       .withSuccessHandler(function(res) {
         console.log('Dashboard: Respuesta del servidor:', res);
         status.innerText = '';
-
+        
         if (!res.success) {
           errorBox.innerText = '❌ Error del servidor: ' + res.error;
           errorBox.style.display = 'block';
           tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#c53030; padding:20px;">Error al cargar datos. Intenta recargar.</td></tr>';
           return;
         }
-
+        
         if (!res.acuerdos || res.acuerdos.length === 0) {
           tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px;">No hay acuerdos registrados. Genera una acta con acuerdos primero.</td></tr>';
           document.getElementById('dashboard-resumen').innerHTML = '<span class="badge azul">Sin acuerdos registrados</span>';
           return;
         }
-
+        
         renderizarDashboard(res.acuerdos);
       })
       .withFailureHandler(function(err) {
@@ -927,12 +958,12 @@
   function renderizarDashboard(acuerdos) {
     var tbody = document.getElementById('dashboard-body');
     tbody.innerHTML = '';
-
+    
     // Imprimir fecha y hora actual de actualización en la cabecera
     var now = new Date();
-    var fechaActualizada = ("0" + now.getDate()).slice(-2) + "/" +
-                           ("0" + (now.getMonth() + 1)).slice(-2) + "/" +
-                           now.getFullYear() + " - " +
+    var fechaActualizada = ("0" + now.getDate()).slice(-2) + "/" + 
+                           ("0" + (now.getMonth() + 1)).slice(-2) + "/" + 
+                           now.getFullYear() + " - " + 
                            now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
     document.getElementById('dash-fecha-hora').innerText = fechaActualizada;
 
@@ -943,7 +974,7 @@
     // Procesamiento y Clasificación de Datos OGPL
     acuerdos.forEach(function(ac) {
       var responsable = ac.responsable || 'No asignado';
-
+      
       if (!oficinasData[responsable]) {
         oficinasData[responsable] = { total: 0, cumplidos: 0, enPlazo: 0, porVencer: 0, vencidos: 0 };
       }
@@ -962,10 +993,10 @@
         enPlazo++;
         oficinasData[responsable].enPlazo++;
       }
-
+      
       // Dibujar la tabla inferior
       var tr = document.createElement('tr');
-      tr.innerHTML =
+      tr.innerHTML = 
         '<td><strong>' + (ac.idActa || 'N/A') + '</strong></td>' +
         '<td>' + (ac.acuerdo || 'Sin descripción') + '</td>' +
         '<td>' + responsable + '</td>' +
@@ -973,15 +1004,15 @@
         '<td>' + (ac.estado || 'Desconocido') + '</td>' +
         '<td><span class="badge ' + (ac.clase || 'azul') + '">' + (ac.indicador || 'SIN ESTADO') + '</span></td>' +
         '<td>' +
-          (ac.estado !== 'Cumplido'
-            ? '<button class="btn-success" style="padding:5px 10px; font-size:0.8em;" onclick="marcarCumplido(\'' + (ac.idAcuerdo || '') + '\')">✓ Cumplido</button>'
+          (ac.estado !== 'Cumplido' 
+            ? '<button class="btn-success" style="padding:5px 10px; font-size:0.8em;" onclick="marcarCumplido(\'' + (ac.idAcuerdo || '') + '\')">✓ Cumplido</button>' 
             : '<span style="color:#38a169; font-weight:bold;">✓ Terminado</span>') +
         '</td>';
       tbody.appendChild(tr);
     });
 
     // Cálculo de Fórmula: % Cumplimiento General
-    var pctCumplimiento = total === 0 ? 0 :
+    var pctCumplimiento = total === 0 ? 0 : 
       (((cumplidos * 1) + (enPlazo * 0.75) + (porVencer * 0.5) + (vencidos * 0)) / total) * 100;
 
     // Actualizar los números de las tarjetas superiores
@@ -993,7 +1024,7 @@
     document.getElementById('kpi-pct-global').innerText = pctCumplimiento.toFixed(2) + '%';
 
     var labelsOficinas = Object.keys(oficinasData);
-
+    
     // Llamar a la función que dibuja los gráficos
     dibujarGraficos(labelsOficinas, oficinasData, pctCumplimiento);
   }
@@ -1092,7 +1123,7 @@
       return;
     }
     if (!confirm('¿Confirmar que este acuerdo ha sido cumplido?\n\nEsta acción registrará la fecha actual como fecha de cumplimiento.')) return;
-
+    
     google.script.run
       .withSuccessHandler(function(res) {
         if (res.success) {
