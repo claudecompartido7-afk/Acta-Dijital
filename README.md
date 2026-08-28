@@ -52,30 +52,26 @@ En días hábiles salta sábados, domingos y los feriados de `FERIADOS_PERU`
 % Cumplimiento = [(Cumplidos × 1) + (En Plazo × 0.75) + (Por Vencer × 0.5)] / Total × 100
 ```
 
+## Acuerdos vs. Compromisos
+
+El formulario distingue dos listas y ambas se guardan en la hoja `Acuerdos`:
+
+| | Contenido | ID | Estado inicial | Indicador |
+|---|---|---|---|---|
+| **Acuerdo** | Decisión sin fecha límite | `..._AC001` | `Cumplido` | `ACUERDO` |
+| **Compromiso** | Tarea con plazo y responsable | `..._CO002` | `Pendiente` | `PENDIENTE` |
+
+El correlativo es continuo entre ambas listas dentro de la misma acta.
+
 ## Pendientes conocidos
 
-Estos puntos están presentes en el código tal como se guardó y conviene
-resolverlos antes de poner el sistema en producción.
+- **`Config.gs` tiene un logo de marcador de posición** (PNG transparente de
+  1×1). Falta pegar el Base64 real de `LOGO_UNMSM`; las instrucciones están
+  en los comentarios del propio archivo.
 
-**Bloqueantes del Dashboard**
-
-- `cargarDashboard()` hace `document.getElementById('dashboard-status')` y luego
-  `status.innerText`, pero ese elemento no existe en el HTML → lanza
-  `TypeError` y el panel no llega a cargar nunca.
-- Lo mismo con `dashboard-resumen`, usado cuando no hay acuerdos.
-
-**Funciones del backend que el frontend llama y no existen en `Codigo.gs`**
-
-- `obtenerHistorialAsistentes()` — la usa `cargarDirectorio()` para llenar los
-  `datalist` de nombres, apellidos, cargos y unidades.
-- `marcarAcuerdoCumplido(idAcuerdo, token)` — la usa el botón «✓ Cumplido».
-- `obtenerOficinas()` — la usa `cargarOficinasSelect()`, que además nunca se
-  invoca, por lo que el filtro por oficina queda vacío.
-
-**Menores**
-
-- `registrarAsistente()` termina con `document.getElementById('directorio-select').value = ''`
-  sobre un elemento inexistente → corta la limpieza del formulario.
-- El bloque «Firma Digital» está duplicado en el HTML y deja un `<div>` sin cerrar.
-- `chartCumpInstance` y `chartEstInstance` se declaran dos veces.
-- El logo (`Config.gs`) es un marcador de posición; falta pegar el Base64 real.
+- **Los acuerdos sin plazo se guardan con estado `Cumplido`.** Es una decisión
+  de diseño para que no aparezcan como pendientes, pero tiene un efecto
+  secundario: entran en el KPI «Acuerdos Cumplidos» y elevan el porcentaje de
+  cumplimiento global, que mide el avance de los compromisos. Si prefieres que
+  queden fuera del cálculo, hay que tratarlos como informativos en
+  `obtenerAcuerdos()` y en `renderizarDashboard()`.

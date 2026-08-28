@@ -401,6 +401,20 @@ function generarActaPDF(datos, token) {
     blob.setName(idActaSolo + ' - ' + datos.tema + '.pdf'); 
     var archivo = carpeta.createFile(blob);
     var urlPDF = archivo.getUrl();
+
+    // Registra el acta, los asistentes y los acuerdos/compromisos en la hoja
+    guardarActaEnBD(idActa, datos, urlPDF, email);
+
+    // Liberamos el bloqueo de concurrencia
+    lock.releaseLock();
+
+    return { success: true, url: urlPDF, idActa: idActa };
+
+  } catch (error) {
+    if (lock.hasLock()) lock.releaseLock();
+    return { success: false, error: error.toString() };
+  }
+}
     
 // -------------------- FUNCIÓN PARA GUARDAR EN BASE DE DATOS --------------------
 function guardarActaEnBD(idActa, datos, urlPDF, email) {
@@ -578,6 +592,147 @@ function obtenerAcuerdos(token, filtroOficina) {
     return { success: true, acuerdos: resultados };
     
   } catch (e) {
+    return { success: false, error: e.toString() };
+  }
+}
+
+// -------------------- API: HISTORIAL DE ASISTENTES --------------------
+/**
+ * Devuelve el historial de asistentes registrados para alimentar los
+ * datalist de autocompletado del formulario (nombres, apellidos, cargos
+ * y unidades). Se llama sin token porque solo expone datos ya presentes
+ * en las actas y se usa al abrir el formulario.
+ */
+function obtenerHistorialAsistentes() {
+  try {
+    var ss = getSpreadsheet();
+    var sheet = ss.getSheetByName('Asistentes');
+    if (!sheet) return { success: true, asistentes: [], apellidos: [], cargos: [], unidades: [] };
+
+    var data = sheet.getDataRange().getValues();
+    if (data.length <= 1) {
+      return { success: true, asistentes: [], apellidos: [], cargos: [], unidades: [] };
+    }
+
+    var vistos = {};
+    var asistentes = [];
+    var setApellidos = {}, setCargos = {}, setUnidades = {};
+
+    // Columnas: ID_Acta(0), Nombres(1), Apellidos(2), Cargo(3), Unidad(4)
+    for (var i = 1; i < data.length; i++) {
+      var nombre   = String(data[i][1] || '').trim();
+      var apellido = String(data[i][2] || '').trim();
+      var cargo    = String(data[i][3] || '').trim();
+      var unidad   = String(data[i][4] || '').trim();
+
+      if (!nombre) continue;
+
+      // Una entrada por persona (nombre + apellido), la más reciente gana
+      var clave = (nombre + '|' + apellido).toLowerCase();
+      if (vistos[clave] === undefined) {
+        vistos[clave] = asistentes.length;
+        asistentes.push({ nombre: nombre, apellido: apellido, cargo: cargo, unidad: unidad });
+      } else {
+        var prev = asistentes[vistos[clave]];
+        if (cargo)  prev.cargo  = cargo;
+        if (unidad) prev.unidad = unidad;
+      }
+
+      if (apellido) setApellidos[apellido] = true;
+      if (cargo)    setCargos[cargo]       = true;
+      if (unidad)   setUnidades[unidad]    = true;
+    }
+
+    asistentes.sort(function(a, b) { return a.nombre.localeCompare(b.nombre); });
+
+    return {
+      success: true,
+      asistentes: asistentes,
+      apellidos: Object.keys(setApellidos).sort(),
+      cargos:    Object.keys(setCargos).sort(),
+      unidades:  Object.keys(setUnidades).sort()
+    };
+  } catch (e) {
+    return { success: false, error: e.toString(), asistentes: [], apellidos: [], cargos: [], unidades: [] };
+  }
+}
+
+// -------------------- API: OFICINAS RESPONSABLES --------------------
+/**
+ * Lista sin repetidos las oficinas responsables registradas en la hoja
+ * Acuerdos. Alimenta el desplegable de filtro del panel gerencial.
+ */
+function obtenerOficinas() {
+  try {
+    var ss = getSpreadsheet();
+    var sheet = ss.getSheetByName('Acuerdos');
+    if (!sheet) return { success: true, oficinas: [] };
+
+    var data = sheet.getDataRange().getValues();
+    if (data.length <= 1) return { success: true, oficinas: [] };
+
+    var set = {};
+    // Columna Responsable = índice 3
+    for (var i = 1; i < data.length; i++) {
+      var resp = String(data[i][3] || '').trim();
+      if (resp) set[resp] = true;
+    }
+
+    return { success: true, oficinas: Object.keys(set).sort() };
+  } catch (e) {
+    return { success: false, error: e.toString(), oficinas: [] };
+  }
+}
+
+// -------------------- API: MARCAR ACUERDO COMO CUMPLIDO --------------------
+/**
+ * Marca un acuerdo o compromiso como cumplido: escribe Estado, la fecha
+ * de cumplimiento y el indicador. Usa LockService para evitar escrituras
+ * simultáneas sobre la misma fila.
+ */
+function marcarAcuerdoCumplido(idAcuerdo, token) {
+  var lock = LockService.getScriptLock();
+  try {
+    verificarToken(token);
+
+    if (!idAcuerdo) return { success: false, error: 'ID de acuerdo no válido.' };
+
+    lock.waitLock(15000);
+
+    var ss = getSpreadsheet();
+    var sheet = ss.getSheetByName('Acuerdos');
+    if (!sheet) return { success: false, error: 'No existe la hoja Acuerdos.' };
+
+    var data = sheet.getDataRange().getValues();
+
+    // Columnas (base 1): H=8 Estado, I=9 FechaCumplimiento, K=11 Indicador
+    for (var i = 1; i < data.length; i++) {
+      if (String(data[i][0]).trim() === String(idAcuerdo).trim()) {
+        if (String(data[i][7]).trim() === 'Cumplido') {
+          lock.releaseLock();
+          return { success: false, error: 'Ese acuerdo ya estaba marcado como cumplido.' };
+        }
+
+        var fila = i + 1;
+        var ahora = new Date();
+        sheet.getRange(fila, 8).setValue('Cumplido');
+        sheet.getRange(fila, 9).setValue(ahora);
+        sheet.getRange(fila, 11).setValue('CUMPLIDO');
+
+        lock.releaseLock();
+        return {
+          success: true,
+          message: 'Acuerdo ' + idAcuerdo + ' marcado como cumplido el ' +
+                   Utilities.formatDate(ahora, Session.getScriptTimeZone(), 'dd/MM/yyyy HH:mm') + '.'
+        };
+      }
+    }
+
+    lock.releaseLock();
+    return { success: false, error: 'No se encontró el acuerdo ' + idAcuerdo + '.' };
+
+  } catch (e) {
+    if (lock.hasLock()) lock.releaseLock();
     return { success: false, error: e.toString() };
   }
 }

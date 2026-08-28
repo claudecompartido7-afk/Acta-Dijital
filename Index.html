@@ -303,10 +303,12 @@
             Actualizado: <span id="dash-fecha-hora">--/--/---- --:--</span>
             <br>
             <button class="btn-primary" style="padding: 6px 12px; margin-top: 8px; font-size: 0.85em; border-radius: 6px;" onclick="cargarDashboard()">🔄 Refrescar Datos</button>
+            <div id="dashboard-status" style="font-size: 0.85em; color: #3182ce; margin-top: 6px; min-height: 1.2em;"></div>
           </div>
         </div>
 
         <div id="dashboard-error" class="error-box" style="display:none;"></div>
+        <div id="dashboard-resumen" class="resumen-box" style="margin-bottom: 20px;"></div>
 
         <!-- TARJETAS KPI SUPERIORES -->
         <div class="kpi-container">
@@ -447,7 +449,8 @@
     
     setTimeout(function() {
       addDynamicItem('agenda-container', 'Punto de agenda');
-      addAcuerdoItem();
+      addAcuerdoSimple();
+      addCompromisoItem();
     }, 100);
   };
 
@@ -468,6 +471,7 @@
     } else if (viewName === 'dashboard') {
       document.getElementById('view-dashboard').style.display = 'block';
       // NUEVO: Cargar automáticamente al entrar
+      cargarOficinasSelect();
       setTimeout(cargarDashboard, 200);
     } else if (viewName === 'admin') {
       document.getElementById('view-admin').style.display = 'block';
@@ -828,7 +832,6 @@
     firmaSubidaBase64 = null; 
     document.getElementById('usar-firma-digital').checked = false; // <-- Limpiar checkbox
     document.getElementById('usar-firma-digital').checked = false; 
-    document.getElementById('directorio-select').value = ''; // <--- AGREGA ESTA LÍNEA
   }
 
   function renderizarParticipantes() {
@@ -855,6 +858,7 @@
       alert("Ingrese el tema de la reunión y registre al menos un asistente.");
       return;
     }
+    document.getElementById('loader').style.display = 'block';
     var datosReunion = {
       tema: document.getElementById('tema').value,
       modalidad: document.getElementById('modalidad').value,
@@ -888,8 +892,10 @@
     document.getElementById('horaFin').value = '';
     document.getElementById('agenda-container').innerHTML = '';
     document.getElementById('acuerdos-container').innerHTML = '';
+    document.getElementById('compromisos-container').innerHTML = '';
     addDynamicItem('agenda-container', 'Punto de agenda');
-    addAcuerdoItem();
+    addAcuerdoSimple();
+    addCompromisoItem();
     asistentes = [];
     renderizarParticipantes();
     clearSignature();
@@ -1022,6 +1028,14 @@
     document.getElementById('kpi-porvencer').innerText = porVencer;
     document.getElementById('kpi-vencidos').innerText = vencidos;
     document.getElementById('kpi-pct-global').innerText = pctCumplimiento.toFixed(2) + '%';
+
+    // Resumen en insignias bajo la cabecera
+    document.getElementById('dashboard-resumen').innerHTML =
+      '<span class="badge azul">Total: ' + total + '</span>' +
+      '<span class="badge verde">Cumplidos: ' + cumplidos + '</span>' +
+      '<span class="badge azul">En plazo: ' + enPlazo + '</span>' +
+      '<span class="badge amarillo">Por vencer: ' + porVencer + '</span>' +
+      '<span class="badge rojo">Vencidos: ' + vencidos + '</span>';
 
     var labelsOficinas = Object.keys(oficinasData);
     
